@@ -1,0 +1,39 @@
+variables:
+  RELEASE_NAME: dh-vaultwarden
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug-v1.2.0
+    entrypoint: [""]
+  before_script:
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+  script:
+    - /kaniko/executor --cache=true --cache-repo=$CI_REGISTRY_IMAGE --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME-latest
+  only:
+    - master
+    - staging
+    - dev
+    - vaultwarden
+
+deploy:
+  stage: deploy
+  image:
+    name: registry.gitlab.com/dh.health/dh-helm-deployer:v0.0.1
+  before_script:
+    - aws eks update-kubeconfig --name $CLUSTER_NAME
+    - chmod 400 /root/.kube/config
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/dh.health/dh-helm-charts.git
+    - cd dh-helm-charts
+    - if [ $CI_COMMIT_REF_NAME = "master" ]; then NAMESPACE="prod"; elif [ $CI_COMMIT_REF_NAME = "vaultwarden" ]; then NAMESPACE="stg"; else NAMESPACE="dev"; fi
+  script:
+    - helm secrets upgrade $RELEASE_NAME $RELEASE_NAME -n $NAMESPACE --create-namespace -i -f $RELEASE_NAME/secrets.$NAMESPACE.yaml -f $RELEASE_NAME/values.$NAMESPACE.yaml --set image.tag=$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA --wait
+  only:
+    - master
+    - staging
+    - dev
+    - vaultwarden
