@@ -2,7 +2,9 @@ name: Vault-warden Docker Image build and push to docker.io
 
 on:
   push:
-    branches: [main]
+    branches: 
+      - main
+      - staging
     
   #pull_request:
     #branches: [ main ]
@@ -19,7 +21,7 @@ jobs:
     - name: Build the Docker image
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
-         image: vault-warden/prod
+         image: vault-warden/{{}}
          registry: docker.io
          username: ${{ secrets.DOCKER_USERNAME }}
          password: ${{ secrets.DOCKER_PASSWORD }}
