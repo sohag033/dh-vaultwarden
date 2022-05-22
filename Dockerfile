@@ -1,5 +1,5 @@
 
-#Firest time deployment
+#Firest time to deployment
 # syntax=docker/dockerfile:1
 
 # This file was generated using a Jinja2 template.
