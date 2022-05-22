@@ -22,7 +22,7 @@ jobs:
       with:
         image: ghcr.io/sohag033/vaultwarden
         registry: ghcr.io
-        username: sohag033
+        username: sohag033@gmail.com
         password: Samajpati044
         tags: ${{ github.sha }}
 
