@@ -68,7 +68,7 @@ jobs:
         echo "images: \n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${GITHUB_SHA::7}" >> vault/deployment.yaml
         git add . 
         git commit -m "Updated the version of the Docker image and push"  
-        git push https://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@github.com/sohag033/kustomize.git 
+        git push 'https://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@github.com/sohag033/kustomize.git'
         sleep 10s; cd .. 
         rm -rf kustomize
 
