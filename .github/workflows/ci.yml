@@ -61,13 +61,13 @@ jobs:
     # Updates the image version in the deployment manifest
     - name: Update the version
       run: |
+        git config --global user.name "sohag033"
+        git config --global user.email "sohag033@gmail.com"
         git clone https://github.com/sohag033/kustomize.git
         cd kustomize
         echo "images: \n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${GITHUB_SHA::7}" >> vault/deployment.yaml
         git add . 
         git commit -m "Updated the version of the Docker image and push"  
-        git config --global user.name "sohag033"
-        git config --global user.email "sohag033@gmail.com"
         git push https://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@github.com/sohag033/kustomize.git 
         sleep 10s; cd .. 
         rm -rf kustomize
