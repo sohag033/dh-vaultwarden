@@ -65,7 +65,7 @@ jobs:
     # Updates the image version in the deployment manifest
     - name: Update the version
       run: |
-        echo "echo "images: \n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${GITHUB_SHA::7}" >> ./kustomize/vault/deployment.yaml
+        echo "images: \n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${GITHUB_SHA::7}" >> /kustomize/vault/deployment.yaml
         cd kustomize && git add . | git commit -m "Updated the version of the Docker image and push" | git push | sleep 10s; cd .. | rm -rf kustomize
 
     # Commits the change
