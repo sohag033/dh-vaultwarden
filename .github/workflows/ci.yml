@@ -80,9 +80,13 @@ jobs:
         git status
         git add .
         git commit -m "Updated the version of the Docker image from kustmiz and delete"
+        git remote set-url origin https://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@https://github.com/sohag033/dh-vaultwarden.git
     # Pushes the updated file to the repo
     - name: Push changes 
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.MY_GITHUB_TOKEN }}
-        force: true
+#       uses: ad-m/github-push-action@master
+#       with:
+#         github_token: ${{ secrets.MY_GITHUB_TOKEN }}
+#         force: true
+        
+
+
