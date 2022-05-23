@@ -68,19 +68,20 @@ jobs:
         echo "images: \n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${GITHUB_SHA::7}" >> vault/deployment.yaml
         git add . 
         git commit -m "Updated the version of the Docker image and push"  
-        git remote set-url origin https://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@github.com/sohag033/kustomize.git
+        #git remote add origin https://github.com/sohag033/kustomize.git
+        git push https://sohag033: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@github.com/sohag033/kustomize.git
         # sleep 10s; cd .. 
         #rm -rf kustomize
 
     # Commits the change
-    - name: Commit files 
-      run: |
-        git config --local user.email "sohag033@gmail.com"
-        git config --local user.name "sohag"
-        git status
-        git add .
-        git commit -m "Updated the version of the Docker image from kustmiz and delete"
-        git remote set-url origin https://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@https://github.com/sohag033/dh-vaultwarden.git
+#     - name: Commit files 
+#       run: |
+#         git config --local user.email "sohag033@gmail.com"
+#         git config --local user.name "sohag"
+#         git status
+#         git add .
+#         git commit -m "Updated the version of the Docker image from kustmiz and delete"
+#         git remote set-url origin https://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@https://github.com/sohag033/dh-vaultwarden.git
     # Pushes the updated file to the repo
 #     - name: Push changes 
 #       uses: ad-m/github-push-action@master
