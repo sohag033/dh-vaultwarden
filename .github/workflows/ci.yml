@@ -61,6 +61,8 @@ jobs:
     # Updates the image version in the deployment manifest
     - name: Update the version
       run: |
+        git config --global user.email "sohag033@gmail.com"
+        git config --global user.name "sohag033"
         git clone https://github.com/sohag033/kustomize.git
         cd kustomize
         echo "images: \n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${GITHUB_SHA::7}" >> vault/deployment.yaml
