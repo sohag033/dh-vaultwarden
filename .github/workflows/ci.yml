@@ -4,12 +4,13 @@ name: 'CI'
 on:
   push:
     branches:
-    - feature/*
-  # Triggers the workflow when a PR created against main branch has been closed
-  pull_request:
-    branches:
-    - main
-    types: [closed]
+      - main
+#     - feature/*
+#   # Triggers the workflow when a PR created against main branch has been closed
+#   pull_request:
+#     branches:
+#     - main
+#     types: [closed]
 
 env:
   IMAGE_NAME: sohag/vaultwarden
@@ -51,11 +52,11 @@ jobs:
     name: 'Update Docker image version'
     runs-on: ubuntu-latest
     # Runs only when the PR has been merged
-    if: github.event.pull_request.merged
+#     if: github.event.pull_request.merged
 
-    defaults:
-      run:
-        shell: bash
+#     defaults:
+#       run:
+#         shell: bash
 
     steps:
     - name: Checkout repository
