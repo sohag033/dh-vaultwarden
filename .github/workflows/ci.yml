@@ -70,7 +70,7 @@ jobs:
         git add . 
         git commit -m "Updated the version of the Docker image and push"  
         git remote set-url origin https://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@github.com/sohag033/kustomize.git
-        git push -U origin main
+        git push -u origin main
         # sleep 10s; cd .. 
         #rm -rf kustomize
 
