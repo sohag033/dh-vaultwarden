@@ -1,4 +1,4 @@
-# Store the personal access token, Docker Hub username and password as GitHub secrets.
+#Please Store the personal access token, Docker Hub username and password as GitHub secrets.
 name: 'CI'
 
 on:
