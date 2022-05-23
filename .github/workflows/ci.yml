@@ -15,7 +15,7 @@ on:
 # env:
 #   IMAGE_NAME: sohag/vaultwarden
 
-# jobs:
+jobs:
 
 #   buildAndPush:
 #     name: 'Build and Push a Docker Image'
@@ -44,7 +44,7 @@ on:
 #       run: docker push $IMAGE_NAME:${GITHUB_SHA::7}
 
   UpdateTheVersion:
-    needs: buildAndPush
+#     needs: buildAndPush
     name: 'Update Docker image version'
     runs-on: ubuntu-latest
     # Runs only when the PR has been merged
