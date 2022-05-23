@@ -3,7 +3,7 @@
 #
 #   $ docker inspect vaultwarden/server:latest-armv7 | jq -r '.[]|.Architecture'
 #   amd64
-#
+# test
 # Recent versions of Docker have started printing a warning when the image's
 # claimed arch doesn't match the host arch. For example:
 #
