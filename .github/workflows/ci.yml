@@ -1,5 +1,3 @@
-manual first one
-
 
 # Store the personal access token, Docker Hub username and password as GitHub secrets.
 name: 'CI'
