@@ -6,10 +6,10 @@ jobs:
         name: Replicate File
 
         steps:
-#         - name: Checkout source repo
-#           uses: actions/checkout@v3
-#           with:
-#             path: ./dh-vaultwarden
+        - name: Checkout source repo
+          uses: actions/checkout@v2
+          with:
+            path: ./dh-vaultwarden
 
         - name: Checkout kustomize repo
           uses: actions/checkout@master
