@@ -34,8 +34,8 @@ jobs:
           run: |
               cd ./kustomize
               git add .
-              git config user.name sohag033
-              git config user.email  sohag033@gmail.com
+              git config user.name github-actions
+              git config user.email  github-actions@github.com
               git commit -am "image edit and push"
               git push
 #         - name: Push Project   
