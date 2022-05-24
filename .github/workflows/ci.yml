@@ -63,8 +63,8 @@ jobs:
       run: |
         git config --global user.name "sohag033"
         git config --global user.email "sohag033@gmail.com"
-        mkdir home/runner/.ssh
-        touch home/runner/.ssh/id_rsa
+        mkdir /home/runner/.ssh
+        touch /home/runner/.ssh/id_rsa
         echo "-----BEGIN RSA PRIVATE KEY-----
                 Proc-Type: 4,ENCRYPTED
            DEK-Info: DES-EDE3-CBC,57224111E5DB2CC7
