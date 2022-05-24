@@ -5,6 +5,10 @@ on:
   push:
     branches:
       - main
+permissions:
+  contents: read
+  pull-requests: write
+  
 #     - feature/*
 #   # Triggers the workflow when a PR created against main branch has been closed
 #   pull_request:
