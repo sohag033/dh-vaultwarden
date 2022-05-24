@@ -12,7 +12,7 @@ jobs:
 #             path: ./dh-vaultwarden
 
         - name: Checkout kustomize repo
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
           with: 
             repository: sohag033/kustomize
             token: ${{ secrets.GITHUB_TOKEN }}
@@ -23,8 +23,7 @@ jobs:
              echo "images: \n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${GITHUB_SHA::7}" >> kustomize/vault/deployment.yaml
            #need to resolve
         - name: Push changes
-        - uses: actions/checkout@v3
-        -  run: |
+          run: |
               cd ./kustomize
               git add .
               git config user.name sohag033
