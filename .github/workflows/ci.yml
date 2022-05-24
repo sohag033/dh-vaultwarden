@@ -12,7 +12,7 @@ jobs:
 #             path: ./dh-vaultwarden
 
         - name: Checkout kustomize repo
-          uses: actions/checkout@v3
+          uses: actions/checkout@master
           with: 
             repository: sohag033/kustomize
             token: ${{ secrets.ACTIONS_TOKEN }}
