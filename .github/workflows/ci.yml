@@ -14,7 +14,7 @@ jobs:
         - name: Checkout config-kustomize
           uses: actions/checkout@master
           with: 
-            repository: tomassirio/projectB
+            repository: sohag033/kustomize
             token: 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 #${{ secrets.ACTIONS_TOKEN }}
             path: ./kustomize
 
