@@ -1,5 +1,5 @@
 on: push
-
+permissions: write-all
 jobs:
     replicate-file:
         runs-on: ubuntu-latest
