@@ -15,7 +15,7 @@ jobs:
           uses: actions/checkout@master
           with: 
             repository: sohag033/kustomize
-            token: ${{ secrets.ACTIONS_TOKEN }}
+            token: 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 #${{ secrets.ACTIONS_TOKEN }}
             path: ./kustomize
 #           env:
 #               AGITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
