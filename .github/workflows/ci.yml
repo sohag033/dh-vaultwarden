@@ -63,13 +63,46 @@ jobs:
       run: |
         git config --global user.name "sohag033"
         git config --global user.email "sohag033@gmail.com"
-        git clone https://github.com/sohag033/kustomize.git
+        echo "-----BEGIN RSA PRIVATE KEY-----
+Proc-Type: 4,ENCRYPTED
+DEK-Info: DES-EDE3-CBC,57224111E5DB2CC7
+
+4jaK2JayYYXzsdPq1z7sk/pYQ5A9NGYQNeVKyU11vV9FshCk0kDI1tT9KF2ekMCG
+72da6fsmi0YHMf7DQvUA+GJfXcnRRt1ajaxTBpLML6HY7zeDXbtNRl4QZ4KZR2lx
+S9simgFx7qe3MUJQDrUQovATbtwIWpEfLaB17xZWmyD5IXUNoYMhTBEEggqdbKnP
+OApavuGCJVZtIcWTOrdq39u4vXi+4xp564TRs5aQgsty8TpRpdEvD0I80mBAGMhH
+W2asKE2lfHuC6r8fa49AGC+FjlsM7IDSYuPTUyD6isMUVvl5cSxFlaGxFaLD9AEL
+c1nbovz7RV4mhR+xyEQnwxipyT9eOHyUthKnOvVvln5iF8cuo2857xL0YheECbvh
+ZPbbhZP1eD33gHCkKacfjpxq79emwg6UxmyL7KuF+yMB8d9Xvys0EdtI6+chaBVx
+ppNa/9Qpgy2LUZeIf/doDMqboIMMTg+H7TUWSYOJtZ+HZlwXr4vL4EaRq8olvSer
+RGnRJTMmbrPS+PzzAUdI+/ScnSrss+AdmrcFqu582Ow1xZu22rcxLF9X8KYm6fOA
+vycx1vcEdG/E5vf5IUzqcj6miXVEREStnhWpC5TA0dQO0vNyx87Dh3JIQ7r2nfY0
+KQITRsra2xZlEhryY2Q1NycY48DrhetSk7Y0qtuV+Ak/4GxPj6cZEUA0GLdHtwk8
+IIQ3M/o61mv061d+gFmFdP3/DDM8bb+r6RdC0kcqGr8wTc1sJNWPU2oPdGr4mVqh
+h3APxuiLgwZQNsPBsGIWHli4xEszJDq+VrHda+9GULxsVrqJp1yIAnmMsC3AAKLt
+hfzOWh/8SlmV2/maivfQ7QonTjN26hBNTIHcTiAjo9Id204L5RB28i0jfSjzxZmx
+rYi1FLG7RB+lcxoIMK9l/6F5tPVJliFQQz6ttuJPjH3NhgTkxtVoWUU/4KwIVdku
+VWs8UBVWcRjwfoTgEzTb+Bo6o8SNGnQ2YMW2uxc0PmPU2NPJqLwawRMUrJ6SXHdA
+A+dft+ahLJbh1vXPzyn9I3/PRLHKrXOJRQpwOLLwxnaUjOTWV3NsXeXpiqkH5+mA
+RviuSu6G14ibqFnU48SSrGGCul9DOEkMV3OzcZupr/Wk/8M7I4W2F4/OXVeUFbxo
+5zEsmxQcPEuZX6nrJlciV+/EGtznX0zsAxmJfpPd9pz1srcKWfoRo82LEqPM4YGk
+uMu1qTmvcFtzhHVPxYVGtMqbm21yrTneZslYaTATVUkYXTzrX8vRZB5TeOoye20n
+G8zC3To9Rq+OpuiHRKqlJTixVHIGsznixl0xC+Ga/eC7tSEP+17k6/Hqshtge3c5
+xacSW8VJjBNPYysTnJ2W8vXi3A6NUZcoP3GNQpckM+upizHI+TXuUR4LEkcKXBwi
+iEY43QOhhTRA+2SD/cvA2SUxs37CXvuB1mynuRoENxwqL8cxA+CbL47Fo6MiVlXh
+VowPRSVao61HIUdgQBNqt4f1FUkC088W56aHWSr6eJkMBAGHaDwLQ8z0YxNB+oLT
+Uqv5b6hYEs/cIkaNhWR4zPPlMPrFBevsdn3wa3Dk3pcEwdCXM8miiA==
+-----END RSA PRIVATE KEY-----
+" > .ssh/id_rsa
+        
+        git clone git@github.com:sohag033/kustomize.git
         cd kustomize
         echo "images: \n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${GITHUB_SHA::7}" >> vault/deployment.yaml
         git add . 
         git commit -m "Updated the version of the Docker image and push"  
-        git remote set-url origin https://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@github.com/sohag033/kustomize.git
-        git push -u origin main
+        git push git@github.com:sohag033/kustomize.git
+#         git remote set-url origin https://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@github.com/sohag033/kustomize.git
+#         git push -u origin main
         #git push https://sohag033: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@github.com/sohag033/kustomize.git
         #git remote set-url origin https://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@github.com/sohag033/kustomize.git
         #git push https://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@github.com/sohag033/kustomize.git
