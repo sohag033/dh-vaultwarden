@@ -6,10 +6,10 @@ jobs:
         name: Replicate File
 
         steps:
-        - name: Checkout source repo
-          uses: actions/checkout@v3
-          with:
-            path: ./dh-vaultwarden
+#         - name: Checkout source repo
+#           uses: actions/checkout@v3
+#           with:
+#             path: ./dh-vaultwarden
 
         - name: Checkout kustomize repo
           uses: actions/checkout@v2
@@ -22,11 +22,16 @@ jobs:
           run: |
              echo "images: \n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${GITHUB_SHA::7}" >> kustomize/vault/deployment.yaml
            #need to resolve
-        - name: Push Project   
-          run: |
-            cd ./kustomize
-            git add .
-            git config user.name sohag033
-            git config user.email  sohag033@gmail.com
-            git commit -am "image edit and push"
-            git push 
+        - name: Push changes
+          uses: ad-m/github-push-action@master
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            branch: main
+#         - name: Push Project   
+#           run: |
+#             cd ./kustomize
+#             git add .
+#             git config user.name sohag033
+#             git config user.email  sohag033@gmail.com
+#             git commit -am "image edit and push"
+#             git push 
