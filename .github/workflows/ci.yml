@@ -67,7 +67,7 @@ jobs:
         mkdir .ssh
         touch .ssh/id_rsa
         chmod 700 .ssh/id_rsa
-        cp ${{secrets.SECRET_SSH_KEY}} .ssh/id_rsa
+        cp ${{secrets.SECRET_SSH_KEY}} /home/runner/.ssh/id_rsa
         git clone git@github.com:sohag033/kustomize.git
         cd kustomize
         echo "images: \n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${GITHUB_SHA::7}" >> vault/deployment.yaml
