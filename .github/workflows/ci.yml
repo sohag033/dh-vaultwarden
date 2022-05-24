@@ -15,7 +15,7 @@ jobs:
           uses: actions/checkout@main
           with: 
             repository: sohag033/kustomize
-            token: ${ secrets.ACTIONS_TOKEN }
+            token: "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"
             path: ./kustomize
 
         - name: Copy/Create file
