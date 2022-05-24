@@ -1,33 +1,186 @@
-on: push
+manual first one
+
+
+# Store the personal access token, Docker Hub username and password as GitHub secrets.
+name: 'CI'
+
+on:
+  push:
+    branches:
+    - feature/*
+  # Triggers the workflow when a PR created against main branch has been closed
+  pull_request:
+    branches:
+    - main
+    types: [closed]
+
+env:
+  IMAGE_NAME: sohag/vaultwarden
 
 jobs:
-    replicate-file:
-        runs-on: ubuntu-latest
-        name: Replicate File
 
-        steps:
-        - name: Checkout source repo
-          uses: actions/checkout@v2
-          with:
-            path: ./dh-vaultwarden
+  buildAndPush:
+    name: 'Build and Push a Docker Image'
+    runs-on: ubuntu-latest
 
-        - name: Checkout config-kustomize
-          uses: actions/checkout@main
-          with: 
-            repository: sohag033/kustomize
-            token: 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
-            path: ./kustomize
+    # Uses the Bash shell regardless of the GitHub Actions runner
+    defaults:
+      run:
+        shell: bash
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-        - name: Copy/Create file
-          run: |
+    - name: Docker build
+      run: docker build . --file Dockerfile --tag $IMAGE_NAME:${GITHUB_SHA::7}
+    
 
-            echo "images: \n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${GITHUB_SHA::7}" >> ./kustomize/vault/deployment.yaml
+    - name: Login to the registry
+      uses: docker/login-action@v1 
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-        - name: Push Project B
-          run: |
-            cd ./kustomize
-            git add .
-            git config user.name sohag033
-            git config user.email sohag033@gmail.com
-            git commit -am "File push to kustomize"
-            git push
+    - name: Docker push
+      run: docker push $IMAGE_NAME:${GITHUB_SHA::7}
+
+    - name: git clone of Kustomize to edit image
+      run: |
+        git clone https://github.com/sohag033/kustomize.git
+
+  UpdateTheVersion:
+    needs: buildAndPush
+    name: 'Update Docker image version'
+    runs-on: ubuntu-latest
+    # Runs only when the PR has been merged
+    if: github.event.pull_request.merged
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    # Updates the image version in the deployment manifest
+    - name: Update the version
+      run: |
+        echo "echo "images:
+\n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${GITHUB_SHA::7}" ./kustomize/vault/deployment.yaml
+      run: cd kustomize && git add . | git commit -m "Updated the version of the Docker image and push" | git push | sleep 10s; cd .. | rm -rf kustomize
+
+    # Commits the change
+    - name: Commit files 
+      run: |
+        git config --local user.email "sohag033@gmail.com"
+        git config --local user.name "sohag"
+        git status
+        git add .
+        git commit -m "Updated the version of the Docker image from kustmiz and delete"
+    # Pushes the updated file to the repo
+    - name: Push changes 
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.MY_GITHUB_TOKEN }}
+        force: true
+
+
+        --------------------edited------------\
+        # Store the personal access token, Docker Hub username and password as GitHub secrets.
+name: 'CI'
+
+on:
+  push:
+    branches:
+      - main
+#     - feature/*
+#   # Triggers the workflow when a PR created against main branch has been closed
+#   pull_request:
+#     branches:
+#     - main
+#     types: [closed]
+
+# env:
+#   IMAGE_NAME: sohag/vaultwarden
+
+jobs:
+
+#   buildAndPush:
+#     name: 'Build and Push a Docker Image'
+#     runs-on: ubuntu-latest
+
+#     # Uses the Bash shell regardless of the GitHub Actions runner
+#     defaults:
+#       run:
+#         shell: bash
+    
+#     steps:
+#     - name: Checkout repository
+#       uses: actions/checkout@v2
+
+#     - name: Docker build
+#       run: docker build . --file Dockerfile --tag $IMAGE_NAME:${GITHUB_SHA::7}
+    
+
+#     - name: Login to the registry
+#       uses: docker/login-action@v1 
+#       with:
+#         username: sohag # ${{ secrets.DOCKERHUB_USERNAME }}
+#         password: 723384e0-aa1a-47fb-b879-816348fabe36 # ${{ secrets.DOCKERHUB_TOKEN }}
+
+#     - name: Docker push
+#       run: docker push $IMAGE_NAME:${GITHUB_SHA::7}
+
+  UpdateTheVersion:
+#     needs: buildAndPush
+    name: 'Update Docker image version'
+    runs-on: ubuntu-latest
+    # Runs only when the PR has been merged
+#     if: github.event.pull_request.merged
+
+#     defaults:
+#       run:
+#         shell: bash
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    # Updates the image version in the deployment manifest
+    - name: Update the version
+      run: |
+        git config --global user.name "sohag033"
+        git config --global user.email "sohag033@gmail.com"
+        git clone https://github.com/sohag033/kustomize.git
+        cd kustomize
+        echo "images: \n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${GITHUB_SHA::7}" >> vault/deployment.yaml
+        git remote set-url origin https://sohag033:${{ secrets.GITHUB_TOKEN }}@github.com/sohag033/kustomize.git
+        git add . 
+        git commit -m "Updated the version of the Docker image and push" 
+        #git push --set-upstream origin main
+        #git push git@github.com:sohag033/kustomize.git
+#         git push -u origin main
+        #git push https://sohag033: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@github.com/sohag033/kustomize.git
+        #git remote set-url origin https://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@github.com/sohag033/kustomize.git
+        git push https://${{ secrets.GITHUB_TOKEN }}@github.com/sohag033/kustomize.git
+        # sleep 10s; cd .. 
+        #rm -rf kustomize
+
+    # Commits the change
+#     - name: Commit files 
+#       run: |
+#         git config --local user.email "sohag033@gmail.com"
+#         git config --local user.name "sohag"
+#         git status
+#         git add .
+#         git commit -m "Updated the version of the Docker image from kustmiz and delete"
+#         git remote set-url origin https://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@https://github.com/sohag033/dh-vaultwarden.git
+    # Pushes the updated file to the repo
+#     - name: Push changes 
+#       uses: ad-m/github-push-action@master
+#       with:
+#         github_token: ${{ secrets.MY_GITHUB_TOKEN }}
+#         force: true
+        
