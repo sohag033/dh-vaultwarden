@@ -69,7 +69,7 @@ jobs:
         #git remote set-url origin https://sohag033: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@github.com/sohag033/kustomize.git
         git add . 
         git commit -m "Updated the version of the Docker image and push"
-        git push https://${{ secrets.GITHUB_TOKEN }}@github.com/sohag033/kustomize.git
+        git push https://${{ github.token }}@github.com/sohag033/kustomize.git
         #git push --set-upstream origin main
         #git push git@github.com:sohag033/kustomize.git
 #         git push -u origin main
