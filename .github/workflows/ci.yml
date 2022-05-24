@@ -29,4 +29,4 @@ jobs:
             git config user.name sohag033
             git config user.email  sohag033@gmail.com
             git commit -am "image edit and push"
-            git push https://${{ secrets.GITHUB_TOKEN }}@github.com/sohag033/kustomize.git
+            git push 
