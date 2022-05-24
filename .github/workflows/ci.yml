@@ -63,18 +63,14 @@ jobs:
       run: |
         git config --global user.name "sohag033"
         git config --global user.email "sohag033@gmail.com"
-        cd /home/runner
-        mkdir .ssh
-        touch .ssh/id_rsa
-        chmod 700 .ssh/id_rsa
-        echo ${{secrets.SECRET_SSH_KEY}} >> /home/runner/.ssh/id_rsa
-        git clone git@github.com:sohag033/kustomize.git
+        git clone https://github.com/sohag033/kustomize.git
         cd kustomize
         echo "images: \n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${GITHUB_SHA::7}" >> vault/deployment.yaml
+        git remote set-url origin https://sohag033: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@github.com/sohag033/kustomize.git
         git add . 
-        git commit -m "Updated the version of the Docker image and push"  
-        git push git@github.com:sohag033/kustomize.git
-#         git remote set-url origin https://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@github.com/sohag033/kustomize.git
+        git commit -m "Updated the version of the Docker image and push" 
+        git push --set-upstream origin main
+        #git push git@github.com:sohag033/kustomize.git
 #         git push -u origin main
         #git push https://sohag033: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@github.com/sohag033/kustomize.git
         #git remote set-url origin https://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@github.com/sohag033/kustomize.git
