@@ -28,5 +28,5 @@ jobs:
             git add .
             git config user.name sohag033
             git config user.email  sohag033@gmail.com
-            git commit -am "image edit and push
+            git commit -am "image edit and push"
             git push
