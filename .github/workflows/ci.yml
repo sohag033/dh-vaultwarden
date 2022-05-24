@@ -15,29 +15,29 @@ jobs:
           uses: actions/checkout@v3
           with: 
             repository: sohag033/kustomize
-            token: ${{ secrets.GITHUB_TOKEN }}
+            token: ${{ secrets.ACTIONS_TOKEN }}
             path: ./kustomize
-          env:
-              AGITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+#           env:
+#               AGITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
 
         - name: Copy/Create file
           run: |
              echo "images: \n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${GITHUB_SHA::7}" >> kustomize/vault/deployment.yaml
-             cd ./kustomize
-             git add .
-             git config user.name sohag033
-             git config user.email  sohag033@gmail.com
-             git commit -am "image edit and push"
-             git push https://${{ secrets.GITHUB_TOKEN }}@github.com/sohag033/kustomize.git
+             #cd ./kustomize
+             #git add .
+             #git config user.name sohag033
+             #git config user.email  sohag033@gmail.com
+             #git commit -am "image edit and push"
+             #git push https://${{ secrets.GITHUB_TOKEN }}@github.com/sohag033/kustomize.git
            #need to resolve
-#         - name: Push changes
-#           run: |
-#               cd ./kustomize
-#               git add .
-#               git config user.name sohag033
-#               git config user.email  sohag033@gmail.com
-#               git commit -am "image edit and push"
-#               git push
+        - name: Push changes
+          run: |
+              cd ./kustomize
+              git add .
+              git config user.name sohag033
+              git config user.email  sohag033@gmail.com
+              git commit -am "image edit and push"
+              git push
 #         - name: Push Project   
 #           run: |
 #             cd ./kustomize
