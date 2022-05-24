@@ -10,13 +10,12 @@ jobs:
           uses: actions/checkout@v2
           with:
             path: ./dh-vaultwarden
-            token: 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
 
         - name: Checkout kustomize repo
           uses: actions/checkout@master
           with: 
             repository: sohag033/kustomize
-            token: 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 #${{ secrets.ACTIONS_TOKEN }}
+            token: ${{ secrets.GITHUB_TOKEN }}
             path: ./kustomize
 #           env:
 #               AGITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
