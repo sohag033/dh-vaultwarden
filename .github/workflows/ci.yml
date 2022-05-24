@@ -72,7 +72,7 @@ jobs:
         git push https://${{ secrets.GITHUB_TOKEN }}@github.com/sohag033/kustomize.git
         #git push --set-upstream origin main
         #git push git@github.com:sohag033/kustomize.git
-#         git push -u origin main
+        #git push -u origin main
         #git push https://sohag033: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@github.com/sohag033/kustomize.git
         #git remote set-url origin https://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@github.com/sohag033/kustomize.git
         #git push https://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@github.com/sohag033/kustomize.git
