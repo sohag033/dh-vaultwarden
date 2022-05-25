@@ -22,7 +22,7 @@ jobs:
 
         - name: Copy/Create file
           run: |
-             echo "images: \n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${GITHUB_SHA::7}" >> kustomize/vault/deployment.yaml
+             echo "images: \n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${{github.ref_name}}-${GITHUB_SHA::7}" >> kustomize/vault/deployment.yaml
              cd ./kustomize
              git add .
              git config user.name sohag033
