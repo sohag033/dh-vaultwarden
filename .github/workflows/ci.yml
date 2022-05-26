@@ -30,7 +30,7 @@ jobs:
             cd ./kustomize
             git config --local user.name "${{ github.repository_owner }}"
             git config --local user.email "${{ github.repository_owner }}@users.noreply.github.com"
-            git add vault/deployment.yml
+            git add vault/deployment.yaml
             git commit -m "image edit and push"
             git status
 
