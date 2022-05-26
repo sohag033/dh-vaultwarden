@@ -18,24 +18,24 @@ jobs:
             token: ${{ secrets.ACTIONS_TOKEN }}
             path: ./kustomize
             
-        - name: Set foobar to cool
-          uses: mikefarah/yq@master
-          with:
-            cmd: cd ./kustomize/vault ; yq -i '.images[0].newTag = "${{github.ref_name}}-${GITHUB_SHA::7}"' 'kustomization.yaml'
+#         - name: Set foobar to cool
+#           uses: mikefarah/yq@master
+#           with:
+#             cmd: cd ./kustomize/vault ; yq -i '.images[0].newTag = "${{github.ref_name}}-${{github.sha::7}}"' 'kustomization.yaml'
 
-        #- name: Replace image 
-         # run: |
-             #sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys CC86BB64
-             #sudo add-apt-repository ppa:rmescandon/yq
-             #sudo apt update
-             #sudo apt install yq -y
-             #yq --version
-             #sudo yq shell-completion bash > /etc/bash_completion.d/yq 
+        - name: Replace image 
+         run: |
+             sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys CC86BB64
+             sudo add-apt-repository ppa:rmescandon/yq
+             sudo apt update
+             sudo apt install yq -y
+             yq --version
+             yq shell-completion bash > /etc/bash_completion.d/yq 
              #source <(yq shell-completion bash)
              #echo -e "images: \n\v- name: vaultwarden   \n  \vvewName: sohag/vaultwarden  \n  \vnewTag: sohag/vaultwarden:${{github.ref_name}}-${GITHUB_SHA::7}" >> ./kustomize/vault/kustomization.yaml
              #sed -i 's/some_tag/sohag\/vaultwarden:\${{github.ref_name}}-\${GITHUB_SHA::7}/g' ./kustomize/vault/kustomization.yaml
-             #cd ./kustomize/vault
-             #yq e -i '.images[0].newTag = "${{github.ref_name}}-${{github.sha::7}}"' ./kustomize/vault/kustomization.yaml
+             cd ./kustomize/vault
+             yq e -i '.images[0].newTag = "${{github.ref_name}}-${{github.sha::7}}"' ./kustomize/vault/kustomization.yaml
         - name: "commander"
           run: ls -lA ./kustomize; cat ./kustomize/vault/kustomization.yaml
         - name: "save image name"
