@@ -17,12 +17,10 @@ jobs:
             repository: "${{ github.repository_owner }}/kustomize"
             token: ${{ secrets.ACTIONS_TOKEN }}
             path: ./kustomize
-#           env:
-#               AGITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
 
         - name: Replace image 
           run: |
-             echo "images: \n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${{github.ref_name}}-${GITHUB_SHA::7}" >> ./kustomize/vault/deployment.yaml
+             echo "images: \n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${{github.ref_name}}-${GITHUB_SHA::7}" >> ./kustomize/vault/kustomization.yaml
         - name: "commander"
           run: ls -lA ./kustomize; cat ./kustomize/vault/deployment.yaml
         - name: "save hello"
@@ -43,12 +41,3 @@ jobs:
             cd ./kustomize
             git push origin main
 
-#   Jhust test
-#         - name: Push changes
-#           run: |
-#               cd ./kustomize
-#               git add .
-#               git config user.name github-actions
-#               git config user.email  github-actions@github.com
-#               git commit -am "image edit and push"
-#               git push
