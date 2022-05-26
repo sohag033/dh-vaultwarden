@@ -20,7 +20,7 @@ jobs:
 
         - name: Replace image 
           run: |
-             echo -e "images: \n\v- name: vaultwarden   \n   \vvewName: sohag/vaultwarden  \n   \vnewTag: sohag/vaultwarden:${{github.ref_name}}-${GITHUB_SHA::7}" >> ./kustomize/vault/kustomization.yaml
+             echo -e "images: \n\v- name: vaultwarden   \n  \vvewName: sohag/vaultwarden  \n  \vnewTag: sohag/vaultwarden:${{github.ref_name}}-${GITHUB_SHA::7}" >> ./kustomize/vault/kustomization.yaml
         - name: "commander"
           run: ls -lA ./kustomize; cat ./kustomize/vault/kustomization.yaml
         - name: "save image name"
@@ -40,4 +40,4 @@ jobs:
           run: |
             cd ./kustomize
             git push origin main
-#test
+
