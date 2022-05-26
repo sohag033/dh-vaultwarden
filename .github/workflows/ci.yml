@@ -22,8 +22,6 @@ jobs:
 
         - name: Replace image 
           run: |
-             echo ${{ secrets.ACTIONS_TOKEN }}
-             echo $ACTIONS_TOKEN
              echo "images: \n\v- name: vaultwarden \n\vvewName: sohag/vaultwarden \n\vnewTag: sohag/vaultwarden:${{github.ref_name}}-${GITHUB_SHA::7}" >> ./kustomize/vault/deployment.yaml
         - name: "commander"
           run: ls -lA ./kustomize; cat ./kustomize/vault/deployment.yaml
