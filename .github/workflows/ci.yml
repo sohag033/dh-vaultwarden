@@ -40,7 +40,7 @@ jobs:
             git config -l
         - name: "push you"
           run: |
-            cd ./pullme
+            cd ./kustomize
             git push origin main
 
 #   Jhust test
