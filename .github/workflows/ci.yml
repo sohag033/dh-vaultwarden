@@ -25,7 +25,7 @@ jobs:
              sudo apt update
              sudo apt install yq -y
              yq --version
-             yq shell-completion bash > /etc/bash_completion.d/yq 
+             sudo yq shell-completion bash > /etc/bash_completion.d/yq 
              #echo -e "images: \n\v- name: vaultwarden   \n  \vvewName: sohag/vaultwarden  \n  \vnewTag: sohag/vaultwarden:${{github.ref_name}}-${GITHUB_SHA::7}" >> ./kustomize/vault/kustomization.yaml
              #sed -i 's/some_tag/sohag\/vaultwarden:\${{github.ref_name}}-\${GITHUB_SHA::7}/g' ./kustomize/vault/kustomization.yaml
              #cd ./kustomize/vault
