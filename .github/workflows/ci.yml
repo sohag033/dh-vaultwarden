@@ -21,7 +21,7 @@ jobs:
         - name: Set foobar to cool
           uses: mikefarah/yq@master
           with:
-            cmd: yq -i '.images[0].newTag = "${{github.ref_name}}-${GITHUB_SHA::7}"' './kustomize/vault/kustomization.yaml'
+            cmd: cd /kustomize/vault ; yq -i '.images[0].newTag = "${{github.ref_name}}-${GITHUB_SHA::7}"' 'kustomization.yaml'
 
         #- name: Replace image 
          # run: |
