@@ -36,10 +36,7 @@ jobs:
              #sed -i 's/some_tag/sohag\/vaultwarden:\${{github.ref_name}}-\${GITHUB_SHA::7}/g' ./kustomize/vault/kustomization.yaml
              #if: ${{ github.ref == 'ref/head/main' }}
              cd ./kustomize/overlays/prod
-             yq e -i '.images[0].newTag = "${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml'
-             #if: ${{ github.ref !== 'ref/head/main' }}
-               #cd ./kustomize/overlays/stg
-               #yq e -i '.images[0].newTag = "${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml'
+             yq e -i '.images[0].newTag = "${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml
                
         - name: Replace image 
           if: github.ref == ref/head/staging
