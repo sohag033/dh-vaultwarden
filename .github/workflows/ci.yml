@@ -20,7 +20,7 @@
             path: ./kustomize
 
         - name: Replace image-prod 
-          if: github.ref == 'ref/head/main'
+          if: github.ref == 'refs/heads/main'
           run: |
              sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys CC86BB64
              sudo add-apt-repository ppa:rmescandon/yq
@@ -39,7 +39,7 @@
              git status
             
         - name: Replace image-stg
-          if: github.ref == 'ref/head/staging'
+          if: github.ref == 'refs/heads/staging'
           run: |
               cd ./kustomize/overlays/stg
               yq e -i '.images[0].newTag = "${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml'
