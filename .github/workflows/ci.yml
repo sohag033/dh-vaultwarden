@@ -7,10 +7,10 @@
       - staging
       - feature/*
   # Triggers the workflow when a PR created against main branch has been closed
-   pull_request:
-        branches:
-         - main
-        types: [closed]
+#    pull_request:
+#         branches:
+#          - main
+#         types: [closed]
   jobs:
        replicate-file:
         runs-on: ubuntu-latest
