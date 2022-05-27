@@ -24,7 +24,6 @@ jobs:
 #             cmd: cd ./kustomize/vault ; yq -i '.images[0].newTag = "\${{github.ref_name}}-\${{github.sha::7}}"' 'kustomization.yaml'
 
         - name: Replace image 
-          if: github.ref ==  'ref/head/main'
           run: |
              sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys CC86BB64
              sudo add-apt-repository ppa:rmescandon/yq
@@ -34,15 +33,17 @@ jobs:
              source <(yq shell-completion bash)
              #echo -e "images: \n\v- name: vaultwarden   \n  \vvewName: sohag/vaultwarden  \n  \vnewTag: sohag/vaultwarden:${{github.ref_name}}-${GITHUB_SHA::7}" >> ./kustomize/vault/kustomization.yaml
              #sed -i 's/some_tag/sohag\/vaultwarden:\${{github.ref_name}}-\${GITHUB_SHA::7}/g' ./kustomize/vault/kustomization.yaml
-             #if: ${{ github.ref == 'ref/head/main' }}
+             if: github.ref ==  'ref/head/main'
              cd ./kustomize/overlays/prod
              yq e -i '.images[0].newTag = "${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml
-               
-        - name: Replace image 
-          if: github.ref ==  'ref/head/staging'
-          run: |
-              cd ./kustomize/overlays/stg
-              yq e -i '.images[0].newTag = "${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml'
+             if: github.ref ==  'ref/head/staging'
+             cd ./kustomize/overlays/stg
+             yq e -i '.images[0].newTag = "${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml'
+#         - name: Replace image 
+#           if: github.ref ==  'ref/head/staging'
+#           run: |
+#               cd ./kustomize/overlays/stg
+#               yq e -i '.images[0].newTag = "${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml'
              
         - name: "commander"
           run: ls -lA ./kustomize; cat ./kustomize/vault/kustomization.yaml
