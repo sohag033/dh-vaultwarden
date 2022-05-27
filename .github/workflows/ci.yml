@@ -1,9 +1,8 @@
-on: 
- push:
-   branches: [main, staging]
-permissions: write-all
-jobs:
-    replicate-file:
+    on: 
+        push:
+          branches: [main, staging]
+    jobs:
+       replicate-file:
         runs-on: ubuntu-latest
         name: image edit
 
