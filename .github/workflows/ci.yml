@@ -42,7 +42,7 @@ jobs:
                #yq e -i '.images[0].newTag = "${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml'
                
         - name: Replace image 
-          if: github.ref !== 'ref/head/staging'
+          if: github.ref == 'ref/head/staging'
           run: |
               cd ./kustomize/overlays/stg
               yq e -i '.images[0].newTag = "${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml'
