@@ -33,7 +33,7 @@ jobs:
              source <(yq shell-completion bash)
              #echo -e "images: \n\v- name: vaultwarden   \n  \vvewName: sohag/vaultwarden  \n  \vnewTag: sohag/vaultwarden:${{github.ref_name}}-${GITHUB_SHA::7}" >> ./kustomize/vault/kustomization.yaml
              #sed -i 's/some_tag/sohag\/vaultwarden:\${{github.ref_name}}-\${GITHUB_SHA::7}/g' ./kustomize/vault/kustomization.yaml
-             if: github.ref == 'refs/heads/main'; then
+             if: github.ref == 'refs/heads/main'
                cd ./kustomize/overlays/prod
                yq e -i '.images[0].newTag = "${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml'
              else:
