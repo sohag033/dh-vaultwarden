@@ -17,11 +17,6 @@ jobs:
             repository: "${{ github.repository_owner }}/kustomize"
             token: ${{ secrets.ACTIONS_TOKEN }}
             path: ./kustomize
-            
-#         - name: Set foobar to cool
-#           uses: mikefarah/yq@master
-#           with:
-#             cmd: cd ./kustomize/vault ; yq -i '.images[0].newTag = "\${{github.ref_name}}-\${{github.sha::7}}"' 'kustomization.yaml'
 
         - name: Replace image-prod 
           if: github.ref == 'ref/head/main'
@@ -41,18 +36,9 @@ jobs:
              git add .
              git commit -m "image edit and push"
              git status
-             
-#         - name: "save image name"
-#           run: |
-#             cd ./kustomize
-#             git config --local user.name "${{ github.repository_owner }}"
-#             git config --local user.email "${{ github.repository_owner }}@users.noreply.github.com"
-#             git add .
-#             git commit -m "image edit and push"
-#             git status
             
         - name: Replace image-stg
-          if: github.ref ==  'ref/head/staging'
+          if: github.ref == 'ref/head/staging'
           run: |
               cd ./kustomize/overlays/stg
               yq e -i '.images[0].newTag = "${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml'
