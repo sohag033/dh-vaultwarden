@@ -71,7 +71,7 @@ jobs:
              yq --version
              source <(yq shell-completion bash)
              cd ./kustomize/overlays/prod
-             yq e -i '.images[0].newTag = "${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml'
+             yq e -i '.images[0].newName = sohag/vaultwarden:"${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml'
              git config --local user.name "${{ github.repository_owner }}"
              git config --local user.email "${{ github.repository_owner }}@users.noreply.github.com"
              git add .
@@ -82,7 +82,7 @@ jobs:
         if: github.ref == 'refs/heads/staging'
         run: |
               cd ./kustomize/overlays/stg
-              yq e -i '.images[0].newTag = "${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml'
+              yq e -i '.images[0].newName = sohag/vaultwarden:"${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml'
               git config --local user.name "${{ github.repository_owner }}"
               git config --local user.email "${{ github.repository_owner }}@users.noreply.github.com"
               git add .
