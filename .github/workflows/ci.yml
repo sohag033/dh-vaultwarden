@@ -28,10 +28,8 @@
              sudo apt install yq -y
              yq --version
              source <(yq shell-completion bash)
-             #echo -e "images: \n\v- name: vaultwarden   \n  \vvewName: sohag/vaultwarden  \n  \vnewTag: sohag/vaultwarden:${{github.ref_name}}-${GITHUB_SHA::7}" >> ./kustomize/vault/kustomization.yaml
-             #sed -i 's/some_tag/sohag\/vaultwarden:\${{github.ref_name}}-\${GITHUB_SHA::7}/g' ./kustomize/vault/kustomization.yaml
              cd ./kustomize/overlays/prod
-             yq e -i '.images[0].newTag = "${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml
+             yq -i '.images[0].newTag = "${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml
              git config --local user.name "${{ github.repository_owner }}"
              git config --local user.email "${{ github.repository_owner }}@users.noreply.github.com"
              git add .
@@ -42,7 +40,7 @@
           if: github.ref == 'refs/heads/staging'
           run: |
               cd ./kustomize/overlays/stg
-              yq e -i '.images[0].newTag = "${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml'
+              yq -i '.images[0].newTag = "${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml'
               git config --local user.name "${{ github.repository_owner }}"
               git config --local user.email "${{ github.repository_owner }}@users.noreply.github.com"
               git add .
