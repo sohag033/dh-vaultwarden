@@ -39,6 +39,7 @@ jobs:
              else
                cd ./kustomize/overlays/stg
                yq e -i '.images[0].newTag = "${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml'
+             fi
         - name: "commander"
           run: ls -lA ./kustomize; cat ./kustomize/vault/kustomization.yaml
         - name: "save image name"
