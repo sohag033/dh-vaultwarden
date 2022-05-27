@@ -3,9 +3,7 @@
   on:
    push:
      branches:
-      - 'main'
-      - 'staging'
-      - feature/*
+        - staging
   # Triggers the workflow when a PR created against main branch has been closed
 #    pull_request:
 #         branches:
