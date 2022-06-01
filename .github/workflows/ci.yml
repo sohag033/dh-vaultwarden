@@ -4,6 +4,7 @@ name: 'CICD To Deploy Vaultwarden'
 on:
   push:
     branches:
+      - staging
       - main
       - feature/*
 ##### Triggers the workflow when a PR created against main branch has been closed
