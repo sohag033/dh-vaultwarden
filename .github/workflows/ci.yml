@@ -71,7 +71,7 @@ jobs:
              yq --version
              source <(yq shell-completion bash)
              cd ./kustomize/overlays/prod
-             yq e -i '.images[0].newName = "sohag/vaultwarden:${{github.ref_name}} - ${{github.sha}}"' 'kustomization.yaml'
+             yq e -i '.images[0].newName = "$IMAGE_NAME:${{github.ref_name}}-${{github.sha}}"' 'kustomization.yaml'
              git config --local user.name "${{ github.repository_owner }}"
              git config --local user.email "${{ github.repository_owner }}@users.noreply.github.com"
              git add .
